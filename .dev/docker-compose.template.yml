@@ -1,0 +1,32 @@
+version: '3'
+services:
+  server:
+    image: ${CI_REGISTRY_IMAGE}:${CI_IMAGE_TAG}
+    ports:
+      - 8080:8080
+    networks:
+      - gateway
+    restart: always
+    volumes:
+      - /home/apds/cdn/:/data/
+    extra_hosts:
+      - "host.docker.internal:172.17.0.1"
+    environment:
+      - POSTGRESQL_URL=${POSTGRESQL_URL}
+      - POSTGRESQL_USERNAME=${POSTGRESQL_USERNAME}
+      - POSTGRESQL_PASSWORD=${POSTGRESQL_PASSWORD}
+      - MAIL_HOST=${MAIL_HOST}
+      - MAIL_USERNAME=${MAIL_USERNAME}
+      - MAIL_PASSWORD=${MAIL_PASSWORD}
+      - MAIL_WEB_HOST=${MAIL_WEB_HOST}
+      - SWAGGER_HOST=${SWAGGER_HOST}
+      - CDN_HOST=${CDN_HOST}
+      - JWT_SECRET=${JWT_SECRET}
+      - VIRTUAL_HOST=api.apds.com
+      - VIRTUAL_PORT=8080
+      - LETSENCRYPT_HOST=api.apds.com
+      - LETSENCRYPT_EMAIL=info@apds.com
+
+networks:
+  gateway:
+    external: true

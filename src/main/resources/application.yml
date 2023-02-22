@@ -1,0 +1,33 @@
+spring:
+  data:
+    web:
+      pageable:
+        one-indexed-parameters: true
+  application:
+    name: apds
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    defer-datasource-initialization: true
+    show-sql: true
+
+  datasource:
+    initialization-mode: always
+    platform: 'postgres'
+    username: 'postgres'
+    password: 'admin'
+    url: 'jdbc:postgresql://localhost:5432/todoapp'
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+security:
+  jwtSecret: ${JWT_SECRET}
+
+swagger:
+  enabled: true
+  host: ${SWAGGER_HOST}
+  path:
