@@ -39,7 +39,7 @@ public class UserService {
         User existingUser = userRepository.findById(id)
                 .orElseThrow(() -> new BusinessException(ErrorCode.resource_missing, "There is no user by that ID."));
 
-        return taskService.getAllTasksByUserId(pageable, id);
+        return taskService.getAllTasksByOwnerId(pageable, id);
     }
 
     public void updateUser(UpdateUserRequest updateUserRequest, String id) {
@@ -73,5 +73,7 @@ public class UserService {
                 .orElseThrow(() -> new BusinessException(ErrorCode.resource_missing, "There is no user like that!"));
         userRepository.delete(user);
     }
+
+
 
 }

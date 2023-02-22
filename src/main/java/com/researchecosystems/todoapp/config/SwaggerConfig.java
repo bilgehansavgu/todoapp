@@ -45,7 +45,7 @@ public class SwaggerConfig {
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2).host(host).pathMapping(path).enable(enabled)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.researchecosystems.apdsapi.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.researchecosystems.todoapp.controller"))
                 .paths(Predicates.not(PathSelectors.regex("/_monitoring/*")))
                 .build()
                 .securitySchemes(Collections.singletonList(securityScheme()))

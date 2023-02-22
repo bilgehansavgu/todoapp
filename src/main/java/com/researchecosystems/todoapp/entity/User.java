@@ -32,6 +32,4 @@ public class User extends Auditable {
     @Column(name = "password_hash")
     private String passwordHash;
 
-    @OneToMany(mappedBy = "owner")
-    private List<Task> tasks = new ArrayList<>();
 }

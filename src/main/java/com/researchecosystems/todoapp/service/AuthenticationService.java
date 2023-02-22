@@ -4,6 +4,7 @@ import com.researchecosystems.todoapp.entity.User;
 import com.researchecosystems.todoapp.exception.BusinessException;
 import com.researchecosystems.todoapp.exception.ErrorCode;
 import com.researchecosystems.todoapp.model.request.auth.LoginRequest;
+import com.researchecosystems.todoapp.model.request.auth.RegisterRequest;
 import com.researchecosystems.todoapp.model.response.login.LoginResponse;
 import com.researchecosystems.todoapp.repository.UserRepository;
 import com.researchecosystems.todoapp.security.JwtService;
@@ -13,6 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.ZonedDateTime;
 
 @AllArgsConstructor
 @Service
@@ -44,6 +46,26 @@ public class AuthenticationService {
                 .name(user.getName())
                 .surname(user.getSurname())
                 .build();
+    }
+
+    //todo register
+
+    public void register(RegisterRequest registerRequest) {
+        User existingUser = userRepository.findUserByEmail(registerRequest.getEmail());
+        if (existingUser != null) {
+            throw new BusinessException(ErrorCode.forbidden, "There is already a registered email like that.");
+        }
+
+        User newUser = new User();
+
+        newUser.setName(registerRequest.getName());
+        newUser.setEmail(registerRequest.getEmail());
+        newUser.setSurname(registerRequest.getSurname());
+        newUser.setPasswordHash(passwordEncoder.encode(registerRequest.getPassword()));
+        newUser.setCreatedDate(ZonedDateTime.now());
+        newUser.setModifiedDate(ZonedDateTime.now());
+
+        userRepository.save(newUser);
     }
 
     public String getAuthenticatedUserId() {

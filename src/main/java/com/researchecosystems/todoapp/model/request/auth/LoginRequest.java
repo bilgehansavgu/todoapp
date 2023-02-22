@@ -15,6 +15,7 @@ public class LoginRequest {
     @NotEmpty
     private String email;
 
+    @NotEmpty
     @Length(min = 6)
     private String password;
 

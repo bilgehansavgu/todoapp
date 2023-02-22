@@ -3,6 +3,7 @@ package com.researchecosystems.todoapp.model.request.user;
 import lombok.Data;
 import lombok.ToString;
 
+import javax.persistence.Column;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
@@ -20,4 +21,6 @@ public class CreateUserRequest {
     @NotEmpty(message = "surname must be given.")
     private String surname;
 
+    @Column(name = "password_hash")
+    private String passwordHash;
 }

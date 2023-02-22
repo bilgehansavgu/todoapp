@@ -9,7 +9,6 @@ import com.researchecosystems.todoapp.model.request.task.CreateTaskRequest;
 import com.researchecosystems.todoapp.model.request.task.UpdateTaskRequest;
 import com.researchecosystems.todoapp.model.response.task.TaskResponse;
 import com.researchecosystems.todoapp.repository.TaskRepository;
-import com.researchecosystems.todoapp.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -23,7 +22,6 @@ import javax.transaction.Transactional;
 public class TaskService {
 
     private final TaskRepository taskRepository;
-    private final UserRepository userRepository;
 
     public Page<TaskResponse> getAllTasks(Pageable pageable) {
 
@@ -31,9 +29,9 @@ public class TaskService {
         return tasks.map(TaskResponse::fromEntity);
     }
 
-    public Page<TaskResponse> getAllTasksByUserId(Pageable pageable, String id) {
+    public Page<TaskResponse> getAllTasksByOwnerId(Pageable pageable, String id) {
 
-        Page<Task> tasks = taskRepository.findAllByUserId(pageable,id);
+        Page<Task> tasks = taskRepository.findAllByOwnerId(pageable,id);
         return tasks.map(TaskResponse::fromEntity);
     }
     public TaskResponse getTask(String id) {
