@@ -36,7 +36,7 @@ This project is a todo application built with Spring Boot, which allows users to
 
 -   `createdDate`: timestamp for when an entity was created.
 -   `modifiedDate`: timestamp for when an entity was last modified.
-- 
+
 ### User
 
 -   `id`: unique identifier for the user.
