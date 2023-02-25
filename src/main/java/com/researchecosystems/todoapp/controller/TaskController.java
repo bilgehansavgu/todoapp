@@ -32,7 +32,7 @@ public class TaskController {
 
     @PostMapping
     public void addTask(@Valid @RequestBody CreateTaskRequest createTaskRequest) {
-        taskService.addTask(createTaskRequest);
+        taskService.addTask(createTaskRequest,authenticationService.getAuthenticatedUserId());
     }
 
     @PutMapping("/{id}")

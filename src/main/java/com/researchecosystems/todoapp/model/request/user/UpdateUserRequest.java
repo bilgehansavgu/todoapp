@@ -6,8 +6,6 @@ import lombok.ToString;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
-/* ????????? */
-
 @Data
 @ToString
 public class UpdateUserRequest {

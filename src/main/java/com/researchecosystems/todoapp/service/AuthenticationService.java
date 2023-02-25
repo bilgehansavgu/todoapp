@@ -35,10 +35,6 @@ public class AuthenticationService {
             throw new BusinessException(ErrorCode.validation, "Wrong Password!");
         }
 
-        //TODO: remove for disabling login without verification
-//        if (!user.isVerified()) {
-//            throw new BusinessException(ErrorCode.validation, "User is not verified.");
-//        }
 
         return LoginResponse.builder()
                 .id(user.getId())
@@ -47,8 +43,6 @@ public class AuthenticationService {
                 .surname(user.getSurname())
                 .build();
     }
-
-    //todo register
 
     public void register(RegisterRequest registerRequest) {
         User existingUser = userRepository.findUserByEmail(registerRequest.getEmail());

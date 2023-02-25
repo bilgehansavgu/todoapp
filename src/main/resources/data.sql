@@ -1,5 +1,3 @@
-/*
-INSERT INTO users (id, created_date, modified_date, email, name, password_hash, recovery_code,
-                   recovery_code_expired_date, surname, verification_code, verification_code_expired_date, is_verified)
-VALUES ('');
-*/
+INSERT INTO users (id, created_date, modified_date, email, name, password_hash,
+                   surname)
+VALUES ('b3bd8fb8-a431-498f-8aa4-2fb336ae7c97',now(),now(),'bilgehan.savgu@gmail.com','bilgehan','$2a$10$vie/CagxRoe9lkRkCwPmIOMXMXj2Yb4LTNEJMsbYLYxsl9xXyNVii','savgu');

@@ -14,6 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.ZonedDateTime;
 
 @AllArgsConstructor
 @Service
@@ -64,6 +65,8 @@ public class UserService {
         newUser.setName(createUserRequest.getName());
         newUser.setEmail(createUserRequest.getEmail());
         newUser.setSurname(createUserRequest.getSurname());
+        newUser.setCreatedDate(ZonedDateTime.now());
+        newUser.setModifiedDate(ZonedDateTime.now());
 
         userRepository.save(newUser);
     }
