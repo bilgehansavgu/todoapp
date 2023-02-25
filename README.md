@@ -15,14 +15,14 @@ This project is a todo application built with Spring Boot, which allows users to
 -   `GET /user`: returns a list of all users.
 -   `GET /user/{id}`: returns the user with the specified ID.
 -   `GET /user/me`: returns the currently logged in user.
--   `PUT /user/me`: updates the information of the currently logged in user.
 -   `GET /user/{id}/task`: returns a list of tasks owned by the user with the specified ID.
+-   `PUT /user/me`: updates the information of the currently logged in user.
 
 ### Task Controller
 
+-   `POST /task`: creates a new task.
 -   `GET /task`: returns a list of all tasks.
 -   `GET /task/{id}`: returns the task with the specified ID.
--   `POST /task`: creates a new task.
 -   `PUT /task/{id}`: updates the task with the specified ID.
 -   `DELETE /task/{id}`: deletes the task with the specified ID.
 
@@ -86,4 +86,4 @@ The application configuration is located in the `application.yml` file, which co
 
 ## Relationships
 
-Each task is owned by a single user, and a user can have zero or more tasks associated with them. The `User` and `Task` entities extend the `Auditable` class,
+Each task is owned by a single user, and a user can have zero or more tasks associated with them. The `User` and `Task` entities extend the `Auditable` class.
