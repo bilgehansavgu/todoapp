@@ -27,5 +27,4 @@ public abstract class Auditable implements Serializable {
     @Column(name = "modified_date", nullable = false)
     @LastModifiedDate
     private ZonedDateTime modifiedDate;
-
 }

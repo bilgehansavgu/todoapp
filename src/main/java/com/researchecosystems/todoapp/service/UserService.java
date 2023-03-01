@@ -56,6 +56,7 @@ public class UserService {
 
     public void addUser(CreateUserRequest createUserRequest) {
         User existingUser = userRepository.findUserByEmail(createUserRequest.getEmail());
+
         if (existingUser != null) {
             throw new BusinessException(ErrorCode.forbidden, "There is already a registered email like that.");
         }
@@ -74,9 +75,7 @@ public class UserService {
     public void deleteUser(String id) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new BusinessException(ErrorCode.resource_missing, "There is no user like that!"));
+
         userRepository.delete(user);
     }
-
-
-
 }
