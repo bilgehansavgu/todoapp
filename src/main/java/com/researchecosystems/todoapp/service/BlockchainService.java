@@ -13,14 +13,14 @@ import java.util.List;
 @Service
 public class BlockchainService {
 
-    private final BlockchainClient blockchainClient;
+    private BlockchainClient blockchainClient;
 
     public List<Block> blockchainQueryAllConsents(){
         return blockchainClient.queryAllConsents();
 
     }
 
-    public Record blockchainCreatePermissionTest(String userName, int consentNumber, DatasetAccessType permissionType) {
+    public Record blockchainCreatePermission(String userName, int consentNumber, DatasetAccessType permissionType) {
         return blockchainClient.createConsent(userName, consentNumber, permissionType);
     }
 

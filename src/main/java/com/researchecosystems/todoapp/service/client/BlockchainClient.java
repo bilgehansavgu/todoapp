@@ -51,10 +51,9 @@ public class BlockchainClient {
         Path walletPath = Paths.get("wallet");
         Wallet wallet = Wallets.newFileSystemWallet(walletPath);
         // load a CCP
-        //TODO: user organizationları değişebilir konuşulcak
         Path networkConfigPath = Paths.get("/Users/bilgehansavgu/Desktop/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/connection-org1.yaml");
+
         Gateway.Builder builder = Gateway.createBuilder();
-        //TODO admin yerine sems olcak
         builder.identity(wallet, "admin").networkConfig(networkConfigPath).discovery(true);
         gateway = builder.connect();
         network = gateway.getNetwork("mychannel");
