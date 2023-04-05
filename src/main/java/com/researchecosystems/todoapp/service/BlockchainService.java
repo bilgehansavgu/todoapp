@@ -3,6 +3,8 @@ package com.researchecosystems.todoapp.service;
 import com.researchecosystems.todoapp.entity.DatasetAccessType;
 import com.researchecosystems.todoapp.entity.Block;
 import com.researchecosystems.todoapp.entity.Record;
+import com.researchecosystems.todoapp.model.request.consent.CreateConsentRequest;
+import com.researchecosystems.todoapp.model.request.consent.UpdateConsentRequest;
 import com.researchecosystems.todoapp.service.client.BlockchainClient;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,15 +19,13 @@ public class BlockchainService {
 
     public List<Block> blockchainQueryAllConsents(){
         return blockchainClient.queryAllConsents();
-
     }
 
-    public Record blockchainCreatePermission(String userName, int consentNumber, DatasetAccessType permissionType) {
-        return blockchainClient.createConsent(userName, consentNumber, permissionType);
+    public Record blockchainCreatePermission(CreateConsentRequest createConsentRequest) {
+        return blockchainClient.createConsent(createConsentRequest);
     }
 
-
-    public Record blockchainChangeConsentPermission(int consentNumber, DatasetAccessType permissionType){
-        return blockchainClient.changeConsentPermission(consentNumber, permissionType);
+    public Record blockchainChangeConsentPermission(UpdateConsentRequest updateConsentRequest){
+        return blockchainClient.changeConsentPermission(updateConsentRequest);
     }
 }

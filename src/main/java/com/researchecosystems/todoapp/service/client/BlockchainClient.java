@@ -12,6 +12,8 @@ import java.util.Properties;
 
 import com.researchecosystems.todoapp.entity.Block;
 import com.researchecosystems.todoapp.entity.Record;
+import com.researchecosystems.todoapp.model.request.consent.CreateConsentRequest;
+import com.researchecosystems.todoapp.model.request.consent.UpdateConsentRequest;
 import lombok.SneakyThrows;
 import org.hyperledger.fabric_ca.sdk.HFCAClient;
 import org.hyperledger.fabric.sdk.security.CryptoSuite;
@@ -65,7 +67,7 @@ public class BlockchainClient {
         byte[] result;
         result = contract.evaluateTransaction("queryAllConsents");
         System.out.println(new String(result));
-        //[{"key":"CONSENT0","record":{"owner":"Tomoko","permissionType":"PUBLIC"}}]
+        //[{"key":"CONSENT0","consent":{"owner":"Tomoko","permissionType":"PUBLIC"}}]
         JSONArray jsonArray = new JSONArray(new String(result));
         List<Block> blocks = new ArrayList<>();
         for(int i=0;i<jsonArray.length();i++){
@@ -84,20 +86,20 @@ public class BlockchainClient {
     }
 
     @SneakyThrows
-    public Record createConsent(String userName, int consentNumber, DatasetAccessType permissionType) {
+    public Record createConsent(CreateConsentRequest createConsentRequest) {
         byte[] result;
-        String consentKey = ("CONSENT" + consentNumber);
-        contract.submitTransaction("createConsent", consentKey, permissionType.toString(), userName);
+        String consentKey = ("CONSENT" + createConsentRequest.getConsentNumber());
+        contract.submitTransaction("createConsent", consentKey, createConsentRequest.getPermissionType().toString(), createConsentRequest.getUserName());
         result = contract.evaluateTransaction("queryConsent", consentKey);
         System.out.println(new String(result));
         return Record.fromJson(new String(result));
     }
 
     @SneakyThrows
-    public Record changeConsentPermission(int consentNumber, DatasetAccessType newPermissionType) {
+    public Record changeConsentPermission(UpdateConsentRequest updateConsentRequest) {
         byte[] result;
-        String consentKey = ("CONSENT" + consentNumber);
-        contract.submitTransaction("changeConsentPermission", consentKey, newPermissionType.toString());
+        String consentKey = ("CONSENT" + updateConsentRequest.getConsentNumber());
+        contract.submitTransaction("changeConsentPermission", consentKey, updateConsentRequest.getPermissionType().toString());
         result = contract.evaluateTransaction("queryConsent", consentKey);
         System.out.println(new String(result));
         return Record.fromJson(new String(result));
